@@ -2,10 +2,10 @@ package com.dbg.travisapp.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -16,6 +16,10 @@ public class Todo {
     @GeneratedValue
     private Integer id;
     private String title;
-    private Boolean done;
+    private Boolean done = Boolean.FALSE;
+    @CreatedDate
+    private Long createdDate;
+    @LastModifiedDate
+    private Long modifiedDate;
 
 }
