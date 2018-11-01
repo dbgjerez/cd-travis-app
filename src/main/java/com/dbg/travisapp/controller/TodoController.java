@@ -4,9 +4,11 @@ import com.dbg.travisapp.model.Todo;
 import com.dbg.travisapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/todo")
@@ -16,8 +18,10 @@ public class TodoController {
     private TodoService todoService;
 
     @GetMapping
-    public Page<Todo> findAll(Pageable pageable) {
-        return todoService.findAll(pageable);
+    public Page<Todo> findAll(@RequestParam(defaultValue = "0", required = false) Integer page,
+                              @RequestParam(defaultValue = "10", required = false) Integer size,
+                              @RequestParam(defaultValue = "false", required = false) Optional<Boolean> done) {
+        return todoService.findAll(PageRequest.of(page, size), done);
     }
 
     @GetMapping("/{idTodo}")
@@ -31,7 +35,8 @@ public class TodoController {
     }
 
     @PutMapping("/{idTodo}")
-    public void update(@PathVariable Integer idTodo, @RequestBody Todo todo) {
+    public void update(@PathVariable Integer idTodo,
+                       @RequestBody Todo todo) {
         todoService.update(idTodo, todo);
     }
 
