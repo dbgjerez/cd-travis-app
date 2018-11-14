@@ -1,0 +1,16 @@
+---
+addons:
+  sonarcloud:
+    branches:
+      - develop
+      - master
+    organization: $SONARCLOUD_PROJECT_KEY
+    token: $SONARCLOUD_TOKEN
+dist: trusty
+jdk: oraclejdk8
+language: java
+install:
+  - mvn assemble
+script:
+  - mvn test
+  - mvn sonar-scanner
