@@ -13,4 +13,3 @@ install:
   - mvn package
 script:
   - mvn test
-  - mvn sonar-scanner
