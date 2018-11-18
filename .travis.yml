@@ -4,9 +4,10 @@ addons:
     branches:
       - develop
       - master
-    organization: $SONARCLOUD_PROJECT_KEY
+    organization: $SONARCLOUD_ORGANIZATION
     token: $SONARCLOUD_TOKEN
 dist: trusty
+sudo: required
 jdk: oraclejdk8
 language: java
 script:
